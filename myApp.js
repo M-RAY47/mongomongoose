@@ -11,7 +11,7 @@ const personSchema = new Schema({
 });
 
 let Person = mongoose.model('Person',personSchema);
-
+/**Save a person data into database */
 const createAndSavePerson = (done) => {
   let AbdouYahouza = new Person({name: 'Abdou Yahouza', age: 25, favoriteFoods: ["Pizza", "Burger", "Beans"]});
 
@@ -20,9 +20,19 @@ const createAndSavePerson = (done) => {
     done(null, data);
   });
 };
-
+/**Save Many people data in the Database */
+let arrayOfPeople = [
+  {name: 'Sani', age: 29, favoriteFoods: ["Pizza", "Burger", "Beans", "Salad"]}, 
+  {name: 'Mounkaila', age: 26, favoriteFoods: ["Pizza", "Burger", "Bread", 'Moringa']},
+  {name: 'Xiao Jia', age: 25, favoriteFoods: ["Noodle", "Ramen", "Beans", "Banana"]},
+  {name: 'Xiao Liu', age: 25, favoriteFoods: ["Ramen", 'Noodle', 'Apple', 'Jicken']},
+  {name: 'Maoyu', age: 27, favoriteFoods: ["Noodle", 'Sardines', "Vegetables"]}
+];
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople, function(err, people) {
+    if (err) return console.error(err);
+    done(null, people);
+  })
 };
 
 const findPeopleByName = (personName, done) => {
