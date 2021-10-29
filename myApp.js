@@ -73,7 +73,7 @@ const findEditThenSave = (personId, done) => {
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
   //findOneAndUpdate uses ( conditions , update , options , callback ) as arguments.
-  Person.findAndUpdate({name: personName}, {age: ageToSet}, {new: true}, (err, updateDoc)=>{
+  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {new: true}, (err, updateDoc)=>{
     if (err) return console.log(err);
     done(null, updateDoc);
   })
